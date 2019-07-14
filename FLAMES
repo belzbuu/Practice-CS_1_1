@@ -10,8 +10,8 @@ int main(){
 	char name1[100];
 	char name2[100];
 	
-	scanf("%s",&name1);
-	scanf("%s",&name2);
+	getName(name1);
+	getName(name2);
 	
 	flames(flaming(name1,name2));
 	return 0;
@@ -19,11 +19,8 @@ int main(){
 
 
 void getName(char * a){
-	char name[100];
-	scanf("%s",&name);
-	for(int i; i  < strlen(name); i++){
-		a[i] = name[i];
-	}
+	printf("Enter a name: ");
+	gets(a);
 	return;
 }
 
@@ -84,7 +81,7 @@ int flaming(char name1[], char name2[]){
 			}
 		}
 	}
-//	int length = (strlen(name1) + strlen(name2)) - counter; 
+	int length = (strlen(name1) + strlen(name2)) - counter; 
 	
 	return counter;	
 	
