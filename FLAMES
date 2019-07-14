@@ -93,6 +93,11 @@ int flaming(char name1[], char name2[]){
 
 void flames(int a){
 	
+	if(a == 0){
+		printf("No common");
+		return;
+	}
+	
 	printf("FLAMES:\n");
 	printf("\t");
 	a = a %6;
