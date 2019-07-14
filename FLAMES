@@ -1,0 +1,122 @@
+#include <stdio.h>
+#include <string.h>
+
+void getName(char * a);
+void flames(int a);
+int isElement(char a, char b[]);
+int flaming(char name1[], char name2[]);
+int main(){
+	
+	char name1[100];
+	char name2[100];
+	
+	scanf("%s",&name1);
+	scanf("%s",&name2);
+	
+	flames(flaming(name1,name2));
+	return 0;
+}
+
+
+void getName(char * a){
+	char name[100];
+	scanf("%s",&name);
+	for(int i; i  < strlen(name); i++){
+		a[i] = name[i];
+	}
+	return;
+}
+
+
+int isElement(char a, char b[]){
+	int counter = 0;
+//	printf("%c\n ----- \n",a);
+	for(int i = 0; i < strlen(b);i++){
+//		printf("%c\n",b[i]);
+		if(a == b[i]){
+			counter++;
+		}
+	}	
+	return counter;
+}
+
+int flaming(char name1[], char name2[]){
+	
+	
+	//lowercase
+	strlwr(name1);
+	strlwr(name2);	
+	
+	int carr = 0;
+	int counter = 0;
+	char carray[100] = {};
+	
+	
+	
+	
+	for(int i = 0; i < strlen(name1);i++){
+		for(int k = 0; k < strlen(name2);k++){
+			if(name1[i] == name2[k]){
+				if(isElement(name1[i],carray) == 0){
+					carray[carr++] = name1[i];
+				}				
+			}
+		}
+	}
+//	
+//	for(int i = 0; i < strlen(carray);i++){
+//		printf("%c\n",carray[i]);
+//	}
+	
+	for(int i = 0; i < strlen(name1);i++){
+		for(int k = 0; k < strlen(carray);k++){
+			if(carray[k] == name1[i]){
+				counter++;
+			}
+		}
+	}
+	
+	
+	for(int i = 0; i < strlen(name2);i++){
+		for(int k = 0; k < strlen(carray);k++){
+			if(carray[k] == name2[i]){
+				counter++;
+			}
+		}
+	}
+//	int length = (strlen(name1) + strlen(name2)) - counter; 
+	
+	return counter;	
+	
+}
+
+
+void flames(int a){
+	
+	printf("FLAMES:\n");
+	printf("\t");
+	a = a %6;
+	switch(a){
+		case 1:
+			printf("Friends");
+			break;
+		case 2:
+			printf("Lovers");
+			break;
+		case 3:
+			printf("Adversaries");
+			break;
+		case 4:
+			printf("Married");
+			break;
+		case 5:
+			printf("Enemy");
+			break;
+		case 0:
+			printf("Sweethearts");
+			break;
+	}
+	return;
+	
+	
+}
