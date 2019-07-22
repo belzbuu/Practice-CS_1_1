@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+float getNumber();
+float computeVolume(float radius, float height);
+void display(float volume);
+int main(){
+	
+	float n1 = getNumber();
+	float n2 = getNumber();
+	display(computeVolume(n1,n2));
+	
+	
+	return 0;
+}
+
+float getNumber(){
+	float n;
+	printf("Enter a number: ");
+	scanf("%f",&n);
+	return n;
+}
+
+float computeVolume(float radius, float height){
+	
+	float pi = 3.1416;
+	
+	float volume = pi * (radius * radius) * height;
+	
+	return volume;
+	
+}
+
+void display(float volume){
+	
+	printf("The volume is %.2f", volume);
+}
