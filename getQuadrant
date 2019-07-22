@@ -1,0 +1,52 @@
+#include <stdio.h>
+int getNumber();
+int getQuadrant(int x, int y);
+void display(int quadrant);
+int main(){
+	
+	int x = getNumber();
+	int y = getNumber();
+	display(getQuadrant(x,y));
+	
+}
+
+
+int getNumber(){
+	printf("Enter a number: ");
+	int n;
+	scanf("%d",&n);
+	return n;
+	
+}
+
+int getQuadrant(int x, int y){
+	
+	if(x > 0 && y > 0){
+		return 1;
+	}
+	if(x < 0 && y > 0) return 2;
+	if(x < 0 && y < 0) return 3;
+	if(x > 0 && y < 0) return 4;
+	if(x > 0 && y == 0) return 5;
+	if(x == 0 && y > 0) return 6;
+	if(x < 0 && y == 0) return 7;
+	if(x == 0 && y < 0) return 8;
+	return 0;
+	
+	
+}
+
+void display(int quadrant){
+	
+	if(quadrant == 1) printf("The point lies on Q1");
+	if(quadrant == 2) printf("The point lies on Q2");
+	if(quadrant == 3) printf("The point lies on Q3");
+	if(quadrant == 4) printf("The point lies on Q4");
+	if(quadrant == 5) printf("The point lies on positive x axis");
+	if(quadrant == 6) printf("The point lies on positive y axis");
+	if(quadrant == 7) printf("The point lies on negative x axis");
+	if(quadrant == 8) printf("The point lies on negative y axis");
+	if(quadrant == 0) printf("The point lies on origin");
+
+
+}
