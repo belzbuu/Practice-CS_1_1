@@ -1,0 +1,45 @@
+#include <stdio.h>
+
+int getNumber();
+int smallestNumber(int n1, int n2, int n3);
+void display(int smallest);
+int main(){
+	
+	
+	int n1 = getNumber();
+	int n2 = getNumber();
+	int n3 = getNumber();
+	display(smallestNumber(n1,n2,n3));
+	
+	return 0;	
+}
+
+
+int getNumber(){
+	int n;
+	printf("Input number: ");
+	scanf("%d",&n);
+	return n;
+	
+}
+
+int smallestNumber(int n1, int n2, int n3){
+	
+	if(n1 < n2 && n1 < n3){
+		return n1;
+	}
+	
+	if(n2 < n3 && n2 < n1){
+		return n2;
+	}
+	
+	return n3;
+	
+}
+
+void display(int smallest){
+	
+	printf("the smallest number is: %d", smallest);
+	
+	
+}
