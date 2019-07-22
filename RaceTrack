@@ -1,0 +1,57 @@
+#include <stdio.h>
+
+int getTime();
+char getPos(int time);
+void display(char pos);
+int main(){
+	
+	
+	
+	display(getPos(getTime()));
+	
+	return 0;
+}
+
+
+
+int getTime(){
+	
+	int time;
+	scanf("%d",&time);
+	return time;
+}
+
+
+char getPos(int time){
+	char pos;
+	time = time % 171;
+	
+	if(time <= 30){
+		pos = 'C';
+	}else if(time <= 85){
+		pos = 'M';
+	}else if(time <= 132){
+		pos ='S';
+	}else{
+		pos ='A';
+	}
+	
+	return pos;
+	
+	
+}
+
+void display(char pos){
+	
+	if(pos == 'C'){
+		printf("the car is on concrete");
+	}else if(pos == 'M'){
+		printf("the car is on mud");
+	}else if(pos == 'S'){
+		printf("the car is on sand");
+	}else{
+		printf("the car is on asphalt");
+		
+	}
+
+}
