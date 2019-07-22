@@ -1,0 +1,108 @@
+#include <stdio.h>
+
+
+int getPlace();
+int getDuration();
+int getTime();
+int computePay(int place,int time, int duration);
+void display(int pay);
+int main(){
+	
+	int place = getPlace();
+	int time = getTime();
+	int duration = getDuration();
+
+	display(computePay(place,time,duration));
+	
+	return 0;
+}
+
+int getPlace(){
+	int place;
+	printf("1 - American \n2 - Africa\n3 - America\n4 - Asia\n");
+	scanf("%d",&place);
+	return place;
+}
+
+int getDuration(){
+	printf("Enter Duration: ");
+	int duration;
+	scanf("%d",&duration);
+	return duration;
+}
+
+int getTime(){
+	printf("1- Day\t 2- Night\n");
+	int day;
+	scanf("%d",&day);
+	return day;
+}
+
+int computePay(int place,int time, int duration){
+	int pay;
+	if(place == 1){
+	
+		if(time == 1){
+			pay = 50;
+			if(duration < 3) return pay;
+			if(duration % 3 != 0) return pay * ((duration/3)+1);
+			return pay * (duration/3);
+		}else{
+			pay = 45;
+			if(duration < 3) return pay;
+			if(duration % 3 != 0) return pay * ((duration/3)+1);
+			return pay * (duration/3);
+		}
+	}
+	if(place == 2){
+		if(time == 1){
+			pay = 45;
+			if(duration < 2) return pay;
+			if(duration % 2 != 0) return pay * ((duration/2)+1);
+			return pay * (duration/2);
+		}else{
+			pay = 30;
+			if(duration < 2) return pay;
+			if(duration % 2 != 0) return pay * ((duration/2)+1);
+			return pay * (duration/2);
+		}
+	}
+	if(place == 3){
+		if(time == 1){
+			pay = 35;
+			if(duration < 3) return pay;
+			if(duration % 3 != 0) return pay * ((duration/3)+1);
+			return pay * (duration/3);
+		}else{
+			pay = 30;
+			if(duration < 3) return pay;
+			if(duration % 3 != 0) return pay * ((duration/3)+1);
+			return pay * (duration/3);
+		}
+	}
+	if(place == 4){
+		if(time == 1){
+			pay = 30;
+			if(duration < 2) return pay;
+			if(duration % 2 != 0) return pay * ((duration/2)+1);
+			return pay * (duration/2);
+		}else{
+			pay = 27;
+			if(duration < 2) return pay;
+			if(duration % 2 != 0) return pay * ((duration/2)+1);
+			return pay * (duration/2);
+		}
+	}	
+	
+	
+}
+
+void display(int pay){
+	
+	printf("Your pay is: %d", pay);
+	
+	
+	
+}
+
+
