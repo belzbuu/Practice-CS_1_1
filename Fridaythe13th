@@ -1,0 +1,123 @@
+#include <stdio.h>
+int isLeapyear(int year);
+int movedd(int year);
+int getFriday(int year);
+int main(){
+	
+//	getFriday(1990);
+	int year;
+	scanf("%d",&year);
+	getFriday(year);
+
+	return 0;
+}
+
+
+int getFriday(int year){
+	
+	int days;
+	int frith = 0;
+	int move = movedd(year);
+	int calen[] = {31,28,31,30,31,30,31,31,30,31,30,31};
+	int calen2[] = {31,29,31,30,31,30,31,31,30,31,30,31};
+
+	
+	for(int i = 0; i < 12 ;i++){
+		int counter = 1;
+		printf("----%d----\n",i+1);
+		if(isLeapyear(year) == 1){
+			days = calen2[i];
+		}else{
+			days = calen[i];
+		}
+		days=calen[i];
+		int ndays = days + move;
+		int ffday = 6 - move;	
+//		printf("%d is firstfriday\n",ffday);
+		for(int j = 0; j < days;j++){
+			 
+			if(j == ffday + (7 * counter)){
+				if(j == 13){
+					printf("%d the 13th\n", j);	
+				} 
+//				
+//				else{
+//					printf("%d is a friday\n",j);	
+//				}
+				counter++;
+			}
+		}
+		move = ndays % 7;
+	}
+	
+	
+	return frith;
+	
+}
+
+int movedd (int year){
+	int counter = 2;
+	if(year == 1990){
+		return 1;
+	}
+		
+	if(year > 1990){
+		counter = 0;
+		for(int i = 0; i <= (year - 1990);i++){
+		int trashyear = year - (year - 1990) + i;
+//		printf("%d year\n",trashyear);
+		if(isLeapyear(trashyear-1) == 1){
+			counter+=2;
+		}else{
+			counter++;
+		}
+		if(counter == 8){
+			counter = 1;
+		}
+		if(counter == 7){
+			counter = 0;
+		}
+//		printf("%d is acounter\n",counter);
+		}
+		return counter;
+	}
+	for(int i = 0; i <= (1990 - year);i++){
+		int trashyear = year - (year - 1990) - i;
+		printf("%d year\n",trashyear);
+		
+		
+		
+		if(isLeapyear(trashyear) == 1){
+			if(counter == 0){
+				counter = 5;
+			}else if(counter == 1){
+				counter = 6;
+			}else{
+				counter -= 2;
+			}
+		}else{
+			counter--;
+		}
+		if(counter == -2){
+			counter = 5;
+		}
+		if(counter == -1){
+			counter = 6;
+		}
+//		printf("%d is acounter\n",counter);
+	}
+	
+	return counter;
+}
+
+
+
+int isLeapyear(int year){
+	
+	if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0){
+		return 1;
+	}
+	return 0;
+}
+
+
