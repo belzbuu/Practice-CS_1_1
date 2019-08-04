@@ -1,0 +1,98 @@
+#include <stdio.h>
+
+int isGet(int asians[],int len);
+int isFinished(int asians[],int len);
+int isOut(int n, int asiansout[],int len);
+int main(){
+	
+	int n;
+	scanf("%d",&n);
+	
+	int asians[n];
+	
+	for(int i = 0; i < n;i++){
+		asians[i] = i+1;
+//		printf("%d ",asians[i]);
+	}
+	
+	int ctr = 0;
+	int by3 = 0;
+	int asiansout[n];
+	int ctr2 = 0;
+	int more = 0;
+		int TAG;
+	while(1){
+		TAG = 0;
+		
+		if(isOut(ctr%n,asiansout,ctr2) == 1){
+//			more = 3;
+			more+=1;
+		}
+//		printf("\nmore: %d",(2+more)%n);
+		if(ctr%n == (2+more)%n){
+			asians[ctr%n] = 0;
+			asiansout[ctr2] = ctr%n;
+			more += 3;
+//			printf("\n%d",asiansout[ctr2]);
+			ctr2++;
+		}
+		if(isFinished(asians,n) == 1){
+			int winner = isGet(asians,n);
+			printf("Winner: %d ", winner);
+			break;
+		}
+			ctr++;
+	}
+	
+//	
+//	printf("\n");
+//	for(int i = 0; i < n;i++){
+////		asians[i] = i+1;
+//		printf("%d ",asians[i]);
+//	}
+	printf("\n");
+//	for(int i = 0; i < ctr2;i++){
+////		asians[i] = i+1;
+//		printf("%d ",asiansout[i]);
+//	}	
+	
+}
+
+
+int isOut(int n, int asiansout[],int len){
+	
+	for(int i = 0; i < len; i++){
+		if(n == asiansout[i]){
+			return 1;
+		}
+	}
+	
+	return 0;
+}
+
+
+int isFinished(int asians[],int len){
+	int checker = 0;
+	for(int i = 0; i < len; i++){
+		if(asians[i] == 0){
+			checker++;
+		}
+	}
+	if(len == (checker+1)){
+		return 1;
+	}
+//	printf("checker == %d",checker);
+//	
+	return 0;
+}
+
+
+int isGet(int asians[],int len){
+	int checker = 0;
+	for(int i = 0; i < len; i++){
+		if(asians[i] != 0){
+			checker += asians[i];
+		}
+	}
+	return checker;
+}
