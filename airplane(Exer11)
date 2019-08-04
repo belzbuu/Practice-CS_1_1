@@ -1,0 +1,66 @@
+#include <stdio.h>
+void display(int n);
+int getNum();
+int main(){
+	
+	
+	display(getNum());
+	
+	
+	
+	
+	
+}
+
+int getNum(){
+	printf("Enter a number: ");
+	int n;
+	scanf("%d",&n);
+	return n;
+}
+
+
+void display(int n){
+	
+	//Upperhalf
+	int asterisks;
+	int space;
+	int rows = 0;
+	while(rows<n){
+		asterisks = 0;
+		space = 0;
+		while(space<rows){
+			printf(" ");
+			space++;
+		}
+		while(asterisks<=n){
+			printf("*");
+			asterisks++;	
+		}
+		printf("\n");
+		
+		rows++;
+	}
+	
+	//Lowerhalf
+	int asterisks2;
+	int space2;
+	int rows2 = n-1;
+	while(rows2>0){
+		asterisks2 = 0;
+		space2 = rows2;
+		
+		while(space2 > 1){
+			printf(" ");
+			space2--;
+		}
+		while(asterisks2<=n){
+			printf("*");
+			asterisks2++;	
+		}
+		printf("\n");
+		
+		rows2--;
+	}
+		
+}
