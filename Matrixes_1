@@ -1,0 +1,254 @@
+/*
+	Name: Raphael James Marie Anthony C. Mansueto
+	Date: 9/27/2019
+	Problem Description: Create a 2 dimensional array and implement functions
+
+
+*/
+#include <stdio.h>
+#include <conio.h>
+#define ROW 4
+#define COL 4
+void getData(int arr[][COL]);
+void display(int arr[][COL]);
+int max(int a[][COL]);
+int rowSum(int a[][COL], int row);
+int columnSum(int arr[][COL], int col);
+int isRowMagic(int arr[][COL]);
+int isColumnMagic(int arr[][COL]);
+int isMagic(int arr[][COL]);
+void repeat(int arr[ROW][COL]);
+void menu();
+int main(){
+	
+
+	int arr[ROW][COL];
+//	int arr[ROW][COL] ={{16,3,2,13},{5,10,11,8},{9,6,7,12},{4,15,14,1}};
+	repeat(arr);
+
+
+}
+
+
+void getData(int arr[ROW][COL]){
+	
+	int i;
+	int j;
+	for(i = 0; i < ROW; i++){
+		for(j = 0; j < COL; j++){
+			int temp;
+			printf("[%d] [%d] : ", i,j);
+			scanf("%d",&temp);
+			arr[i][j] = temp;
+		}
+		printf("\n");
+	}
+}
+
+
+void display(int arr[ROW][COL]){
+	int i;
+	int j;
+	for(i = 0; i < ROW; i++){
+		for(j = 0; j < COL; j++){
+			
+			printf("%d \t",arr[i][j]);	
+		}
+		printf("\n");
+	}
+		printf("\n");
+}
+
+int max(int arr[ROW][COL]){
+	
+	int i;
+	int j;
+	int max = arr[0][0];
+	for(i = 0; i < ROW; i++){
+		for(j = 0; j < COL; j++){
+			if(arr[i][j] > max){
+				max = arr[i][j];
+			}
+		}
+	}
+	return max;
+}
+
+int rowSum(int arr[ROW][COL],int row){
+	int i;
+	row -=1;
+	int sum = 0;
+	for(i = 0; i < COL; i++){
+		sum += arr[row][i];
+	}
+	return sum;
+}
+int columnSum(int arr[ROW][COL],int col){
+	int i;
+	col -=1;
+	int sum = 0;
+	for(i = 0; i < ROW; i++){
+		sum += arr[i][col];
+	}
+	return sum;
+}
+int isRowMagic(int arr[ROW][COL]){
+	int i;
+	int j;
+	int TAG = 0;
+	int sum;
+	int temp;
+	for(i = 0; i < ROW; i++){
+		sum = 0;
+		for(j = 0; j < COL; j++){
+			sum+= arr[i][j];
+		}
+		
+		if(i > 0){
+			if(temp != sum) return 0;
+		}
+		temp = sum;
+	}
+	return 1;
+	
+}
+
+
+int isColumnMagic(int arr[ROW][COL]){
+	int i;
+	int j;
+	int TAG = 0;
+	int sum;
+	int temp;
+	for(i = 0; i < COL; i++){
+		sum = 0;
+		for(j = 0; j < ROW; j++){
+			sum+= arr[j][i];
+		}
+	
+		if(i > 0){
+			if(temp != sum) return 0;
+		}
+			temp = sum;
+	}
+	return 1;
+}
+int isMagic(int arr[ROW][COL]){
+	
+	int i;
+	int j;
+	int TAG = 0;
+	int sum;
+	int temp;
+	int dsum = 0;
+	isRowMagic(arr);
+	isColumnMagic(arr);
+	//left diagonal
+	int lsum = 0;
+	for(i = 0; i < ROW;i++){
+		dsum += arr[0][i];
+	}
+	for(i = 0; i < COL; i++){		
+		lsum += arr[i][i];
+	}
+	//right diagonal
+	int rsum = 0;
+	for(i = COL-1; i >=0; i--){
+		
+		rsum += arr[ROW-i-1][i];
+
+
+	}
+
+	if( rsum != dsum || lsum != dsum)return 0;
+	return 1;
+	
+}
+void menu(){
+	printf("1. Get Data\n2. Display\n3. Max\n4. Row Sum\n5. Column Sum\n6. is Row Magic\n7. is Column Magic\n8. is Magic\n");
+}
+
+void repeat(int arr[ROW][COL]){
+	system("cls");
+	int x = 1;
+	char temp;
+	int value;
+	while(x!=0){
+			
+			//function
+			menu();
+			int n;
+			scanf("%d",&n);
+			switch(n){
+				case 1: {
+					system("cls");
+					getData(arr);
+					getch();
+					repeat(arr);
+				}
+				case 2:{
+					system("cls");
+					display(arr);
+					getch();
+					repeat(arr);
+				}
+				case 3:{
+					system("cls");
+					printf("Max: %d", max(arr));
+					getch();
+				
+					repeat(arr);
+				}
+				case 4: {
+					system("cls");
+					printf("Enter the row: ");
+					int n;
+					scanf("%d",&n);
+					printf("Row Sum: %d", rowSum(arr,n));
+					getch();
+					
+					repeat(arr);
+				}
+				case 5: {
+					system("cls");
+					printf("Enter the column: ");
+					int n;
+					scanf("%d",&n);
+					printf("Column Sum: %d",columnSum(arr,n));
+				
+					getch();
+					
+					repeat(arr);
+				}
+				case 6: {
+					system("cls");
+					printf("is Row Magic: %d",isRowMagic(arr));
+					
+					getch();
+					
+					repeat(arr);
+				}
+				case 7: {
+					
+					system("cls");
+					printf("is Column Magic: %d",isColumnMagic(arr));
+					getch();
+				
+					repeat(arr);
+				}
+				case 8: {
+					system("cls");
+					printf("is Magic: %d",isMagic(arr));
+					getch();
+				
+					repeat(arr);
+				
+				}
+				
+			}
+	}
+
+	
+			return;	
+
+}
