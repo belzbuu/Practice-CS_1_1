@@ -1,0 +1,281 @@
+/*
+	Name: Raphael James Marie Anthony C. Mansueto
+	Date: September 13, 2019
+	Problem Description: A program that will convert decimal number into binary, octal and hexadecimal number.
+
+
+*/
+#include <stdio.h>
+#include <string.h>
+#include <windows.h>
+void gotoxy(int x, int y){
+	COORD p = {x, y};
+ 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), p);
+}
+
+int to_Hexa(int n,int arr[], int len);
+void repeat();
+void boxDisplay();
+//void to_Hexa(int n);
+int to_Binary(int n);
+void reverseString(char c[],int size);
+int toOctal(int n);
+void menu();
+void repeat();
+void exit(int a);
+int main(){
+	
+	repeat();
+	return 0;
+}
+
+void menu(){
+	boxDisplay();
+	int x = 37;
+	gotoxy(x,9);printf("Conversion from Decimal to:");
+	gotoxy(x,12);printf("1. Binary");
+	
+	gotoxy(x,13);printf("2. Octal");
+	
+	gotoxy(x,14);printf("3. Hexadecimal");
+	
+	gotoxy(x,15);printf("4. Exit");
+	
+		gotoxy(x,17);printf("Enter a valid choice[1-4]:");
+	
+}
+
+
+
+void boxDisplay(){
+	
+	int height = 15;
+	int width = 40;
+	int i;
+	int j;
+	for(i = 0; i < height; i++){
+		for(j = 0; j < width; j++){
+			if(i == 0 || i == height - 1){
+				if(j == 0 && i == 0){
+					gotoxy(30+j,7+i);printf("%c",201);
+				}else if(j == width-1 && i == 0){
+					gotoxy(30+j,7+i);printf("%c",187);
+				}else if(j == 0 && i == height-1){
+					gotoxy(30+j,7+i);printf("%c",200);
+				}else if(j == width-1 && i == height-1){
+					gotoxy(30+j,7+i);printf("%c",188);
+				}
+				else{
+					gotoxy(30+j,7+i);printf("%c",205);
+				}
+				
+			}else{
+				if(j == 0 || j == width-1){
+					gotoxy(30+j,7+i);printf("%c",186);
+				}else{
+					printf(" ");
+				}
+			}
+			
+		}
+		printf("\n");
+	}
+	
+}
+int to_Binary(int n){
+	
+	int j;
+	int binary = 0;
+	int i;
+	int counter = 0;
+	int TAG = 0;
+	int temp2 = n;
+	
+	while(temp2 > 0){
+	
+		
+		if(temp2 % 2 != 0){
+			j = 1;
+			TAG = 1;
+		}else{
+			if(TAG != 1){
+				counter++;
+			}
+			j = 0;
+		}
+		binary = binary*10 + j;
+		
+		temp2 /= 2;
+	}
+	int final_bin = 0;
+	while(binary > 0){
+		i = binary%10;
+		final_bin = final_bin*10 + i;
+		binary /= 10;
+	}
+	while(counter != 0){
+		final_bin *= 10;
+		counter--;
+	}
+	return final_bin;
+	
+	
+}
+
+int to_Hexa(int n,int arr[], int len){
+	if(n == 0) {
+		gotoxy(37,14);printf("Converted: 0");
+		return;
+	}
+	
+	char letters[] = "ABCDEF";
+	char toHexa[100];
+	char j;
+	int i = 0;
+	while(n > 0){
+		
+		if((n % 16) > 9){
+			int k;
+			for(k = 0; k < 6;k++){
+				if(k == (n%16) - 10){
+					j = letters[k];
+				}
+			}
+		}else{
+			j = n%16+'0' ;
+		}
+		toHexa[i] = j;
+		i++; 
+		n /= 16;
+	}
+	
+	int lennew = strlen(toHexa);
+	reverseString(toHexa,lennew);
+	
+	return lennew;
+
+}
+
+int to_Octal(int n){
+	
+	int i;
+	int toOctal = 0;
+	int j;
+	int counter = 0;
+	int TAG = 0;
+	
+	while(n > 0){
+		if(n % 8 !=0){
+		i = n % 8;
+		TAG = 1;
+		}else{
+			if(TAG !=1){
+			counter++;
+			}
+			i =0;
+		}
+		toOctal = toOctal*10 + i;
+		n /= 8;
+	}
+	int final_oct = 0;
+	while(toOctal > 0){
+		i = toOctal%10;
+		final_oct = final_oct*10 + i;
+		toOctal /= 10;
+	}
+
+	while(counter != 0){
+		final_oct *= 10;
+		counter--;
+	}
+	
+	return final_oct;
+}
+
+
+
+void reverseString(char c[],int size){
+	
+	int i;
+	
+	for(i = 0 ; i < size/2;i++){
+		
+		char temp = c[i];
+		c[i] = c[size-i-1];
+		c[size-i-1] = temp;
+		
+	}
+	
+	
+}
+
+void repeat(){
+	
+	int x = 1;
+	char temp;
+	int value;
+	while(x!=0){
+
+			//function
+			menu();
+			int n;
+			gotoxy(50,19);scanf("%d",&n);
+			switch(n){
+				case 1: {
+					system("cls");
+					int input;
+					boxDisplay();
+					gotoxy(37,12);printf("Enter number: ");
+					scanf("%d",&input);
+					value =	to_Binary(input);
+					gotoxy(37,14);printf("Converted: %d",value);
+					gotoxy(30,25);printf("Press any key to continue.....");
+					temp = getch();
+					system("cls");
+					break;
+				}
+				case 2:{
+					system("cls");
+					int input;
+					boxDisplay();
+					gotoxy(37,12);printf("Enter number: ");
+					scanf("%d",&input);
+					value =	to_Octal(input);
+					gotoxy(37,14);printf("Converted: %d",value);
+					gotoxy(30,25);printf("Press any key to continue.....");
+					temp = getch();
+					system("cls");
+					break;
+				}
+				case 3:{
+					
+					system("cls");
+					int input;
+					boxDisplay();
+					int len = 100;
+					int toHex[len];
+					gotoxy(37,12);printf("Enter number: ");
+					scanf("%d",&input);
+					len = to_Hexa(input,toHex,len);
+					int i;
+					gotoxy(37,14);printf("Converted: ");
+					for(i = 0; i < len; i++){
+						gotoxy(48+i,14);printf("%c", toHex[i]);
+					}
+					gotoxy(30,25);printf("Press any key to continue.....");
+					temp = getch();
+					system("cls");
+					break;
+				}
+				case 4: {
+					gotoxy(0,23);exit(0);
+					break;
+				}
+				
+			}
+	}
+
+	
+			return;	
+
+}
