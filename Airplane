@@ -1,262 +1,258 @@
+/*
+	Name: Raphael James Marie Anthony C. Mansueto
+	Date: September 9, 2019
+	Problem Description: A program to assign seats on each flight of the airline's only plane (capacity: 10 seats).
+
+
+*/
 #include <stdio.h>
-
-
-#include <conio.h>
-#include <windows.h>
+#include<windows.h>
+void gotoxy(int x, int y)
+{
+COORD coord;
+coord.X = x;
+coord.Y = y;
+SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+void exit(int a);
+void initSeats(int seats[], int size);
+void displaySeats(int seats[], int size);
+int assignSeat(int st[], int seatType, int size);
+int assignFirstClass(int seats[], int size);
+int assignEconomy(int seats[], int size);
+void boardPass(int seat);
 void boxDisplay();
 void ticketPass();
-void displaySeats(int arr[],int size);
-void initAssign(int arr[],int size);
-void boardPass(int seat);
-void assignSeat(int arr[],int seatType, int size);
-void exit(int status);
-void gotoxy(int x, int y)
+void repeat(int seats[],int size);
+//void exit();
+void fullCheck(int seats[],int size);
 
 
-{
-	COORD p = {x, y};
- 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), p);
-}
-
-int assignEconomy(int arr[],int size);
-int assignFirstClass(int arr[],int size);
-void repeat();
 int main(){
-		
-		
-		repeat();
+	
+	int size = 10;
+	int seats[size];
+	initSeats(seats,size);
+	repeat(seats,size);	
 }
 
-
-void assignSeat(int arr[],int seatType, int size){
-	int seat;
-
-	if(seatType == 1){
-		seat = assignFirstClass(arr,size);
-		if(seat == -1){
-			int confirm;
-			gotoxy(20,30);printf("Not available, Do you want to be transferred to Economy Section: 1 - yes | 0 - no");
-			gotoxy(45,31);scanf("%d",&confirm);
-			if(confirm == 1){
-				system("cls");
-				seat = assignEconomy(arr,size);
-				displaySeats(arr,size);
-				boardPass(seat);
-				
-			}else{
-				system("cls");
-				displaySeats(arr,size);
-				gotoxy(48,28);printf("The next flight is 3 hours from now");
-				exit(0);
-			}
-		}
-		
-				
-				
+void initSeats(int seats[], int size){
+	
+	int i;
+	for(i = 0; i < size; i++){
+		seats[i] = 0;
 	}
 	
-	if(seatType == 2){
-		seat = assignEconomy(arr,size);
+}
+void displaySeats(int seats[], int size){
+	
+	int i;
+	boxDisplay();
+	gotoxy(43,9);printf("Welcome to MGM Airlines!!");
+	gotoxy(40,12);printf("Press 1 for First Class Section");
+	gotoxy(40,13);	printf("Press 2 for Economy Section");
+	for(i = 0; i < size;i++){
+		if(i < size/2){
+			gotoxy(48+i*3,17);printf("[%d]",seats[i]);
+			
+		}else{
+			gotoxy(48+(i-5)*3,18);printf("[%d]",seats[i]);
+		}
+	}
+	
+	
+	
+	
+}
+void boxDisplay(){
+	int i;
+		int j;
+		int height = 20;
+		int width = 50;
+		int b = 30;
+		int b2 = 7;
+		for(i = 0; i < height;i++){
+			for(j = 0; j<width;j++){
+				if(i == 0 || i ==  height - 1){
+					if(j == 0 && i == 0){
+						gotoxy(b+j,b2+i);printf("%c",201);
+					}else if(j == width - 1&& i == 0){
+						gotoxy(b+j,b2+i);printf("%c",187);
+					}else if(j == 0 && i == height -1){
+						gotoxy(b+j,b2+i);printf("%c",200);
+					}else if(j == width-1 && i == height -1){
+							gotoxy(b+j,b2+i);printf("%c",188);
+					}else{
+						gotoxy(b+j,b2+i);printf("%c",205);
+					}
+				}else{
+					if(j == 0 || j == width-1){
+						gotoxy(b+j,b2+i);printf("%c",186);
+					}else{
+						printf(" ");
+					}
+				}
+				
+			
+			}
+			printf("\n");
+		}
+}
+void ticketPass(){
+	int i;
+		int j;
+		int height = 6;
+		int width = 30;
+		int b = 41;
+		int b2 = 20;
+		for(i = 0; i < height;i++){
+			for(j = 0; j<width;j++){
+				if(i == 0 || i ==  height - 1){
+					if(j == 0 && i == 0){
+						gotoxy(b+j,b2+i);printf("%c",201);
+					}else if(j == width - 1&& i == 0){
+						gotoxy(b+j,b2+i);printf("%c",187);
+					}else if(j == 0 && i == height -1){
+						gotoxy(b+j,b2+i);printf("%c",200);
+					}else if(j == width-1 && i == height -1){
+							gotoxy(b+j,b2+i);printf("%c",188);
+					}else{
+						gotoxy(b+j,b2+i);printf("%c",205);
+					}
+				}else{
+					if(j == 0 || j == width-1){
+						gotoxy(b+j,b2+i);printf("%c",186);
+					}else{
+						printf(" ");
+					}
+				}
+				
+			
+			}
+		
+		}
+}
+
+int assignSeat(int st[], int seatType,int size){
+	fullCheck(st,size);
+	int seat = 0;
+	if(seatType == 1){
+		seat = assignFirstClass(st,size);
 		if(seat == -1){
 			int confirm;
-			gotoxy(20,30);printf("Not available, Do you want to be transferred to First Class Section: 1 - yes | 0 - no");
-			gotoxy(20,31);scanf("%d",&confirm);
-			if(confirm == 1){
-				seat = assignFirstClass(arr,size);
-				displaySeats(arr,size);
-				
-			}else{
-				
-				system("cls");
-				displaySeats(arr,size);
-				gotoxy(48,28);printf("The next flight is 3 hours from now");
-				exit(0);
-			}
+				gotoxy(20,30);printf("No available, Do you want to be transferred to economy section?: 1-yes, 0 - No \t");
+				gotoxy(45,31);scanf("%d",&confirm);
+				if(confirm == 1){
+					system("cls");
+					seat = assignEconomy(st,size);
+//					displaySeats(st,size);
+//					boardPass(seat);
+				}else{
+					system("cls");
+					displaySeats(st,size);
+					gotoxy(48,28);printf("The next flight is 3 hours from now");
+					repeat(st,size);
+				}
+			
 		}
-		
-	
+
+	}
+	if(seatType == 2){
+		seat = assignEconomy(st,size);
+			if(seat == -1){
+			int confirm;
+				gotoxy(20,30);printf("No available, Do you want to be transferred to economy section?: 1-yes, 0 - No \t");
+				gotoxy(45,31);scanf("%d",&confirm);
+				if(confirm == 1){
+					system("cls");
+					seat = assignFirstClass(st,size);
+//					displaySeats(st,size);
+//					boardPass(seat);
+				}else{
+					system("cls");
+					displaySeats(st,size);
+					gotoxy(48,28);printf("The next flight is 3 hours from now");
+					repeat(st,size);
+				}
+			
+		}
 	}
 	
 	if(seat != -1){
-			displaySeats(arr,size);
-			boardPass(seat);
-	}else{
-		gotoxy(50,28);printf("Full, The plane will fly");
+		displaySeats(st,size);
+		boardPass(seat);
+	}
+	
+	return 1;
+}
+int assignFirstClass(int seats[], int size){
+	
+	int i;
+	
+	for(i = 0; i < size/2; i++){
+		if(seats[i] != 1){
+			seats[i] = 1;
+			return i;
+		}
+	}
+	return -1;
+}
+
+void fullCheck(int seats[],int size){
+	int i;
+	int ctr = 0;
+	for(i = 0; i < size; i++){
+		if(seats[i] == 1){
+			ctr++;
+		}
+	}
+	if(ctr == 10){
+		displaySeats(seats,size);
+		gotoxy(48,28);printf("Full, The Plane will fly");
 		exit(0);
 	}
 }
 
-int assignFirstClass(int arr[],int size){
-	int i;
-	int ctr = 0;
-	for(i = 0; i < size/2; i++){
-		if(arr[i] != 1){
-			arr[i] = 1;
-			return i;
-		}
-	}
-	return -1;
-
-	
-}
-
-int assignEconomy(int arr[],int size){
+int assignEconomy(int seats[], int size){
 	int i;
 	for(i = size/2; i < size; i++){
-		if(arr[i] != 1){
-			arr[i] = 1;
+		if(seats[i] != 1){
+			seats[i] = 1;
 			return i;
 		}
 	}
 	return -1;
-}
-void initAssign(int arr[],int size){
-	
-	int i;
-	for(i = 0; i < size; i++){
-		arr[i] = 0;
-	}
-	
-}
-
-
-void displaySeats(int arr[],int size){
-	
-	int i;
-	int j;
-	
-	boxDisplay();gotoxy(43,9);printf("Welcome to Cathy Airlines");
-	gotoxy(40,12);printf("Press 1 for First Class Section\n");
-	gotoxy(40,13);printf("Press 2 for Economy Section\n");
-	
-	
-	
-
-	for(i = 0; i < size; i++){
-		if(i < size/2){
-			gotoxy(48+i*3,17);printf("[%d]",arr[i]);
-		}else{
-			gotoxy(48+(i-5)*3,18);printf("[%d]",arr[i]);
-		}
-	}
-	
 
 }
-
-void boxDisplay(){
-	
-	int height = 20;
-	int width = 50;
-	int i;
-	int j;
-	for(i = 0; i < height; i++){
-		for(j = 0; j < width; j++){
-			if(i == 0 || i == height - 1){
-				if(j == 0 && i == 0){
-					gotoxy(30+j,7+i);printf("%c",201);
-				}else if(j == width-1 && i == 0){
-					gotoxy(30+j,7+i);printf("%c",187);
-				}else if(j == 0 && i == height-1){
-					gotoxy(30+j,7+i);printf("%c",200);
-				}else if(j == width-1 && i == height-1){
-					gotoxy(30+j,7+i);printf("%c",188);
-				}
-				else{
-					gotoxy(30+j,7+i);printf("%c",205);
-				}
-				
-			}else{
-				if(j == 0 || j == width-1){
-					gotoxy(30+j,7+i);printf("%c",186);
-				}else{
-					printf(" ");
-				}
-			}
-			
-		}
-		printf("\n");
-	}
-	
-}
-
 void boardPass(int seat){
+	
+	
+
 	int x = 49;
 	ticketPass();
-	gotoxy(x,21);	printf("Board Pass");
-	if(seat+1 < 5){
-	gotoxy(x,22);	printf("First Class Section");
+	gotoxy(x,21); printf("Board Pass");
+	if(seat+1 <= 5){
+		gotoxy(x,22); printf("First Class Section");
 	}else{
-	gotoxy(x,22);	printf("Economy Section");
+		gotoxy(x,21); printf("Economy Class Section");
 	}
-	gotoxy(x,23);	printf("Seat# %d", seat+1);
-}
-
-
-void ticketPass(){
-	int height = 6;
-	int width = 30;
-	int i;
-	int j;
-	int x = 41;
-	int y = 20;
-	for(i = 0; i < height; i++){
-		for(j = 0; j < width; j++){
-			if(i == 0 || i == height - 1){
-				if(j == 0 && i == 0){
-					gotoxy(x+j,y+i);printf("%c",201);
-				}else if(j == width-1 && i == 0){
-					gotoxy(x+j,y+i);printf("%c",187);
-				}else if(j == 0 && i == height-1){
-					gotoxy(x+j,y+i);printf("%c",200);
-				}else if(j == width-1 && i == height-1){
-					gotoxy(x+j,y+i);printf("%c",188);
-				}
-				else{
-					gotoxy(x+j,y+i);printf("%c",205);
-				}
-				
-			}else{
-				if(j == 0 || j == width-1){
-					gotoxy(x+j,y+i);printf("%c",186);
-				}else{
-					printf(" ");
-				}
-			}
-			
-		}
-		printf("\n");
-	}
+	gotoxy(x,23); printf("Seat# %d",seat+1);
 	
 	
 }
 
+void repeat(int seats[],int size){
+	int x = 1;
 
-
-
-
-
-
-void repeat(){
-	int x;
-	int size = 10;
-			int seats[10];
-			initAssign(seats,size);
 	char temp;
-	while(x!=0){
-
-			//function
-			system("cls");
-			displaySeats(seats,size);
-			int seatType;
-			gotoxy(55,15);scanf("%d",&seatType);
-			assignSeat(seats,seatType,size);
-			
-			gotoxy(30,28);printf("Press Any key to Continue");
-			gotoxy(70,28);temp = getch();
-	}
-
 	
-			return;	
-
+	while(x!=0){
+		system("cls");
+		displaySeats(seats,size);
+		int seatType;
+		gotoxy(55,15); scanf("%d",&seatType);
+		assignSeat(seats,seatType,size);
+		gotoxy(30,28);printf("Press any key to continue: ");
+		gotoxy(70,28); temp = getch();
+	}
 }
-
