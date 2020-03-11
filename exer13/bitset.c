@@ -67,20 +67,17 @@ void getUnion(BitSet result,BitSet s1,BitSet s2){
 	int i,j,tag;
 	
 	initialize(result);
-	for(i = 0; i < MAX;i++){
-		
-				result[i] = s1[i];
-	}
-	for(i = 0; i < MAX;i++){
-		tag = 0;
-		for(j = 0; j < MAX;j++){
-			if(s2[i] == result[j]){
-				tag = 1;
-			}
+	for(i = 0 ; i < MAX;i++){
+		if(s1[i] == TRUE){
+	
+			result[i] = TRUE;
 		}
-			if(tag != 1){
-				result[cardinality(result)] = s2[i];
-			}
+	}
+	
+	for(i = 0 ; i < MAX;i++){
+		if(s2[i] == TRUE) {
+			result[i] = TRUE;	
+		}
 	}
 	return;
 }
@@ -89,11 +86,9 @@ void intersection(BitSet result,BitSet s1,BitSet s2){
 	int i,j;
 	
 	initialize(result);
-	for(i = 0; i < MAX;i++){
-		for(j = 0 ; j < MAX;j++){
-			if(s1[i] == s2[j]){
-				result[cardinality(result)]= s1[i];
-			}
+	for(i = 0 ; i < MAX;i++){
+		if(s1[i] == TRUE && s2[i] == TRUE){
+			result[i] = TRUE;
 		}
 	}
 		return;
@@ -101,18 +96,9 @@ void intersection(BitSet result,BitSet s1,BitSet s2){
 
 void difference(BitSet result,BitSet s1,BitSet s2){
 	int i,j;
-	int tag = 0;
 	initialize(result);
-	for(i = 0; i < MAX;i++){
-		tag = 0;
-		for(j = 0 ; j < MAX;j++){
-			if(s1[i] == s2[j]){
-					tag = 1;
-			}
-		}
-		if(tag == 0){
-					result[cardinality(result)]= s1[i];
-		}
+	for(i = 0 ; i < MAX;i++){
+		if(s1[i] == TRUE && s2[i] == FALSE) result[i] = TRUE;
 	}
 		return;
 }
