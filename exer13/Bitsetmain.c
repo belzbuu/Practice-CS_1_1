@@ -154,19 +154,18 @@ int main(){
 				switch(sub_choice){
 					
 						case 1:{
-							 cardinality(&s1);
+							 printf("%d",cardinality(&s1));
 							break;
 						}
 						case 2:{
 							
 							 
-							 cardinality(&s2);
+							 printf("%d",cardinality(&s2));
 							break;
 						}
 						case 0:{
 							
-							
-							 cardinality(&result);
+							 printf("%d",cardinality(&result));
 							break;
 						}
 					}
