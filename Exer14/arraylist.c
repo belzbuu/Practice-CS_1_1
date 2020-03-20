@@ -18,7 +18,7 @@ List newList(int size){
 	return  s1;
 }
 void addEnd(List list,int item){
-
+	
 	int n  = list->count;
 	list->items[n] = item;
 	list->count = n+1;
@@ -83,6 +83,13 @@ void removeFront(List list){
 		list->items[ctr-1] = list->items[ctr]; 
 	}
 	list->count -= 1;
+}
+int isUnique(List list, int item){
+	int ctr;
+	for(ctr = 0; ctr < list->count;ctr++){
+		if(list->items[ctr] == item) return 0;
+	}
+	return 1;
 }
 void menu(){
 	

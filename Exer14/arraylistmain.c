@@ -27,8 +27,18 @@ int main(){
 			}
 			
 			case 5:{
+				if(s1->count == s1->size){
+					s1->size *= 2;
+					s1 = (List) realloc(s1,s1->size*sizeof(List));
+					s1->items = (int*) realloc(s1->items,s1->size*sizeof(int));
+				}
 				printf("Enter an item: ");
 				scanf("%d",&item);
+				while(isUnique(s1,item) != 1){
+					printf("element must be unique!\n");
+					printf("Enter item: ");
+					scanf("%d",&item);
+				}
 				addEnd(s1,item);
 				break;
 			}
@@ -41,23 +51,53 @@ int main(){
 			case 8:{
 				printf("Enter index: ");
 				scanf("%d",&item);
+				while(item >= s1->count){
+					printf("INVALID INDEX, ENTER AGAIN!\n");
+					printf("Enter index: ");	
+					scanf("%d",&item);
+				}
 				Remove(s1,item);
 				break;
 			}
 			
 			case 6:{
+				if(s1->count == s1->size){
+					s1->size *= 2;
+					s1 = (List) realloc(s1,s1->size*sizeof(List));
+					s1->items = (int*) realloc(s1->items,s1->size*sizeof(int));
+				}
 				printf("Enter index: ");
 				scanf("%d",&elem);
+				while(elem >= s1->count){
+					printf("INVALID INDEX, ENTER AGAIN!\n");
+					printf("Enter index: ");	
+					scanf("%d",&elem);
+				}
 				printf("Enter item: ");
 				scanf("%d",&item);
+				while(isUnique(s1,item) != 1){
+					printf("element must be unique!\n");
+					printf("Enter item: ");
+					scanf("%d",&item);
+				}
 				insertAfter(s1,item,elem);
 				break;
 			}
 			
 			
 			case 4:{
+				if(s1->count == s1->size){
+					s1->size *= 2;
+					s1 = (List) realloc(s1,s1->size*sizeof(List));
+					s1->items = (int*) realloc(s1->items,s1->size*sizeof(int));
+				}
 				printf("Enter item: ");
 				scanf("%d",&item);
+				while(isUnique(s1,item) != 1){
+					printf("element must be unique!\n");
+					printf("Enter item: ");
+					scanf("%d",&item);
+				}
 				addFront(s1,item);
 				break;
 			}

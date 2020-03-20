@@ -15,3 +15,4 @@ void addEnd(List list,int item) ;
 void addFront(List list,int item);
 void removeFront(List list);
 void menu();
+int isUnique(List list,int item);
