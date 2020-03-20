@@ -14,7 +14,7 @@ int main(){
 		printf("Enter choice: ");
 		scanf("%d",&choice);
 		switch(choice){
-			
+
 			case 1:{
 				printf("Enter list size: ");
 				scanf("%d",&size);
@@ -26,7 +26,7 @@ int main(){
 				break;
 			}
 			
-			case 6:{
+			case 5:{
 				printf("Enter an item: ");
 				scanf("%d",&item);
 				addEnd(s1,item);
@@ -38,14 +38,14 @@ int main(){
 				break;
 			}
 
-			case 4:{
+			case 8:{
 				printf("Enter index: ");
 				scanf("%d",&item);
 				Remove(s1,item);
 				break;
 			}
 			
-			case 5:{
+			case 6:{
 				printf("Enter index: ");
 				scanf("%d",&elem);
 				printf("Enter item: ");
@@ -55,14 +55,14 @@ int main(){
 			}
 			
 			
-			case 7:{
+			case 4:{
 				printf("Enter item: ");
 				scanf("%d",&item);
 				addFront(s1,item);
 				break;
 			}
 			
-			case 8:{
+			case 7:{
 				removeFront(s1);
 				break;
 			}

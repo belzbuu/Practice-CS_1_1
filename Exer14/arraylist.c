@@ -28,7 +28,10 @@ int isEmpty(List list){
 	return 0;
 }
 void display(List list){
-	
+	if(isEmpty(list) == 1){
+		printf("Set is empty!!\n");
+		return;
+	}
 	int i;
 	printf("Set ={ ");
 	for(i = 0 ; i < list->count;i++){
@@ -40,7 +43,7 @@ void display(List list){
 	}
 	printf("}");
 	printf("\n");
-		
+	return;
 }
 int contains(List list, int item){
 	int i;
@@ -83,5 +86,7 @@ void removeFront(List list){
 }
 void menu(){
 	
-	printf("1.New List\n2.Is Empty\n3.Display\n4.Remove\n5.Insert After\n6.Add End\n7.Add Front\n8.Remove Front\n9.Contains\n");
+//	printf("1.New List\n2.Is Empty\n3.Display\n4.Remove\n5.Insert After\n6.Add End\n7.Add Front\n8.Remove Front\n9.Contains\n");
+	printf("1.New List\n2.Is Empty\n3.Display\n4.Add Front\n5.Add End\n6.Insert After\n7.Remove Front\n8.Remove\n9.Contains\n");
+
 }
